@@ -828,14 +828,16 @@ function decoratePlans() {
     const plans = [];
 
     const $rows = Array.from($plans.children);
-    $rows.forEach(($row, i) => {
+    $rows.forEach(($row) => {
       const $cells = Array.from($row.children);
-      const $image = $cells[0];
-      const $information = $cells[1];
-      const $pricing = $cells[2];
-      const $dropdown = $cells[3];
-      const $button = $cells[4];
+      const $promotion = $cells[0];
+      const $image = $cells[1];
+      const $information = $cells[2];
+      const $pricing = $cells[3];
+      const $dropdown = $cells[4];
+      const $button = $cells[5];
 
+      const promotion = $promotion.textContent;
       const image = $image.textContent;
       const information = Array.from($information.children).map(($inf) => $inf.textContent);
       const pricing = Array.from($pricing.children).map(($pri) => $pri.textContent);
@@ -843,12 +845,13 @@ function decoratePlans() {
       const button = $button.textContent;
 
       plans.push({
-        image, information, pricing, dropdown, button,
+        promotion, image, information, pricing, dropdown, button,
       });
     });
 
     $plans.innerHTML = '';
     plans.forEach((plan) => {
+      const promotion = plan.promotion;
       const title = plan.information[0];
       const description = plan.information[1];
       const image = 'assets/' + plan.image + '.svg';
@@ -857,7 +860,14 @@ function decoratePlans() {
       const buttonText = plan.button;
       const $plan = createTag('div', { class: 'plan' });
       $plans.append($plan);
-
+      if (promotion) {
+        $plan.classList.add('promotional');
+        const $promotionalHeader = createTag('div', { class: 'plan-promotional-header' });
+        $plan.append($promotionalHeader);
+        const $promotionalHeaderText = createTag('span');
+        $promotionalHeaderText.innerHTML = promotion;
+        $promotionalHeader.append($promotionalHeaderText);
+      }
       const $header = createTag('div', { class: 'plan-header' });
       $plan.append($header);
       const $headerText = createTag('div', { class: 'plan-header-text' });
