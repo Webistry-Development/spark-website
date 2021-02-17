@@ -85,7 +85,7 @@ function decorateHeader() {
 
 function decoratePictures() {
   if (!document.querySelector('picture')) {
-    const helixImages = document.querySelectorAll('main img[src^="/hlx_"');
+    const helixImages = document.querySelectorAll('main img[src^="/hlx_"]');
     helixImages.forEach(($img) => {
       const $pic = createTag('picture');
       const $parent = $img.parentNode;
@@ -261,6 +261,12 @@ function readBlockConfig($block) {
 
 async function fetchBlogIndex() {
   const resp = await fetch('/blog-index.json');
+  const json = await resp.json();
+  return (json.data);
+}
+
+async function fetchPricingFeatures() {
+  const resp = await fetch('/pricing-features.json');
   const json = await resp.json();
   return (json.data);
 }
@@ -817,6 +823,204 @@ function decorateTutorials() {
   });
 }
 
+function decoratePlans() {
+  document.querySelectorAll('main .plans').forEach(($plans) => {
+    const plans = [];
+
+    const $rows = Array.from($plans.children);
+    $rows.forEach(($row, i) => {
+      const $cells = Array.from($row.children);
+      const $image = $cells[0];
+      const $information = $cells[1];
+      const $pricing = $cells[2];
+      const $dropdown = $cells[3];
+      const $button = $cells[4];
+
+      const image = $image.textContent;
+      const information = Array.from($information.children).map(($inf) => $inf.textContent);
+      const pricing = Array.from($pricing.children).map(($pri) => $pri.textContent);
+      const dropdown = Array.from($dropdown.children).map(($drd) => $drd.textContent);
+      const button = $button.textContent;
+
+      plans.push({
+        image, information, pricing, dropdown, button,
+      });
+    });
+
+    $plans.innerHTML = '';
+    plans.forEach((plan) => {
+      const title = plan.information[0];
+      const description = plan.information[1];
+      const image = 'assets/' + plan.image + '.svg';
+      const pricing = plan.pricing[0];
+      const pricingDescription = plan.pricing[1];
+      const buttonText = plan.button;
+      const $plan = createTag('div', { class: 'plan' });
+      $plans.append($plan);
+
+      const $header = createTag('div', { class: 'plan-header' });
+      $plan.append($header);
+      const $headerText = createTag('div', { class: 'plan-header-text' });
+      $header.append($headerText);
+      const $title = createTag('span', { class: 'plan-title' });
+      $title.innerHTML = title;
+      $headerText.append($title);
+      const $description = createTag('p', { class: 'plan-description' });
+      $description.innerHTML = description;
+      $headerText.append($description);
+      const $image = createTag('img', { src: image, class: 'plan-image' });
+      $header.append($image);
+      const $separator = createTag('div', { class: 'plan-separator' });
+      $plan.append($separator);
+      const $pricing = createTag('span', { class: 'plan-pricing' });
+      if (pricing === 'Free') {
+        $pricing.innerHTML = '<strong>Free</strong>';
+      } else {
+        $pricing.innerHTML = 'US $<strong>' + pricing + '</strong>/mo';
+      }
+
+      $plan.append($pricing);
+      const $pricingDescription = createTag('p', { class: 'plan-pricing-description' });
+      if (pricingDescription) {
+        $pricingDescription.innerHTML = pricingDescription;
+        $plan.append($pricingDescription);
+      }
+      const $bottom = createTag('div', { class: 'plan-bottom' });
+      $plan.append($bottom);
+      if (plan.dropdown[0] !== 'none') {
+        const $dropdown = createTag('select', { class: 'plan-dropdown' });
+        $bottom.append($dropdown);
+        plan.dropdown.forEach((option) => {
+          const $option = createTag('option');
+          $option.innerHTML = option;
+          $dropdown.append($option);
+        });
+      }
+      const $button = createTag('input', { type: 'submit', class: 'plan-button' });
+      $button.value = buttonText;
+      $bottom.append($button);
+    });
+  });
+}
+
+async function decoratePricing() {
+  const pricingFeatures = await fetchPricingFeatures();
+  document.querySelectorAll('main .feature-comparison').forEach(($features) => {
+    $features.innerHTML = '';
+    const categories = [];
+    const categoryGroups = [];
+    pricingFeatures.forEach((feature) => {
+      const category = feature.Category;
+      if (!categories.includes(category)) {
+        categories.push(category);
+        categoryGroups[category] = [];
+      }
+      categoryGroups[category].push(feature);
+    });
+
+    categories.forEach((category) => {
+      const $category = createTag('div', { class: 'pricing-category' });
+      $features.append($category);
+      const $categoryHeader = createTag('div', { class: 'category-header' });
+      $category.append($categoryHeader);
+      const $categoryImage = createTag('img', { src: 'assets/' + toClassName(category) + '.svg', class: 'category-image' });
+      $categoryHeader.append($categoryImage);
+      const $categoryTitle = createTag('span', { class: 'category-title' });
+      $categoryTitle.innerHTML = category;
+      $categoryHeader.append($categoryTitle);
+      categoryGroups[category].forEach((feature) => {
+        let $columnOne;
+        let $columnTwo;
+        let $columnThree;
+
+        if (feature['Column 1'] === 'Y') {
+          $columnOne = createTag('img', { src: 'assets/checkmark.svg' });
+        } else {
+          $columnOne = createTag('img', { src: 'assets/crossmark.svg' });
+        }
+
+        if (feature['Column 2'] === 'Y') {
+          $columnTwo = createTag('img', { src: 'assets/checkmark.svg' });
+        } else {
+          $columnTwo = createTag('img', { src: 'assets/crossmark.svg' });
+        }
+
+        if (feature['Column 3'] === 'Y') {
+          $columnThree = createTag('img', { src: 'assets/checkmark.svg' });
+        } else {
+          $columnThree = createTag('img', { src: 'assets/crossmark.svg' });
+        }
+
+        const $feature = createTag('div', { class: 'feature-row' });
+        $features.append($feature);
+        const $titleContainer = createTag('div', { class: 'feature-title-container' });
+        $feature.append($titleContainer);
+        const $title = createTag('span', { class: 'feature-title' });
+        $title.innerHTML = feature.Description;
+        $titleContainer.append($title);
+        const $columnOneContainer = createTag('div', { class: 'feature-column' });
+        $feature.append($columnOneContainer);
+        $columnOneContainer.append($columnOne);
+        const $columnTwoContainer = createTag('div', { class: 'feature-column' });
+        $feature.append($columnTwoContainer);
+        $columnTwoContainer.append($columnTwo);
+        const $columnThreeContainer = createTag('div', { class: 'feature-column' });
+        $feature.append($columnThreeContainer);
+        $columnThreeContainer.append($columnThree);
+      });
+    });
+  });
+}
+
+function decorateContactBlocks() {
+  document.querySelectorAll('main .contact').forEach(($contacts) => {
+    const contacts = [];
+
+    const $rows = Array.from($contacts.children);
+    $rows.forEach(($row, i) => {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      const $cells = Array.from($row.children);
+      const $title = $cells[0];
+      const $phone = $cells[1];
+      const $text = $cells[2];
+
+      const title = $title.textContent;
+      const phone = $phone.textContent;
+      const text = $text.textContent;
+
+      contacts.push({
+        title, phone, text,
+      });
+    });
+
+    $contacts.innerHTML = '';
+    contacts.forEach((contact) => {
+      const title = contact.title;
+      const phone = contact.phone;
+      const text = contact.text;
+
+      const $contact = createTag('div', { class: 'contact-block-container' });
+      $contacts.append($contact);
+      const $title = createTag('span', { class: 'contact-block-title' });
+      $title.innerHTML = title;
+      $contact.append($title);
+      const $contactBlock = createTag('div', { class: 'contact-block' });
+      $contact.append($contactBlock);
+      const $phoneContainer = createTag('div', { class: 'contact-block-phone-container' });
+      $contactBlock.append($phoneContainer);
+      const $phone = createTag('span', { class: 'contact-block-phone' });
+      $phone.innerHTML = phone;
+      $phoneContainer.append($phone);
+      const $textContainer = createTag('div', { class: 'contact-block-text-container' });
+      $contactBlock.append($textContainer);
+      const $text = createTag('p', { class: 'contact-block-text' });
+      $text.innerHTML = text;
+      $textContainer.append($text);
+    });
+  });
+}
+
 function decorateMetaData() {
   const $meta = document.querySelector('main .metadata');
   if ($meta) {
@@ -860,6 +1064,9 @@ async function decoratePage() {
   decorateMigratedPages();
   decorateBlogPage();
   decorateTutorials();
+  decoratePlans();
+  decoratePricing();
+  decorateContactBlocks();
   decorateMetaData();
   decorateCheckerBoards();
   decorateDoMoreEmbed();
