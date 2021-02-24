@@ -856,9 +856,17 @@ function decoratePlans() {
       const description = plan.information[1];
       const image = 'assets/' + plan.image + '.svg';
       const pricing = plan.pricing[0];
-      const pricingDescription = plan.pricing[1];
+      let oldPricing;
+      let pricingDescription;
       const buttonText = plan.button;
       const $plan = createTag('div', { class: 'plan' });
+
+      if (plan.pricing.length === 2) {
+        pricingDescription = plan.pricing[1];
+      } else {
+        oldPricing = plan.pricing[1];
+        pricingDescription = plan.pricing[2];
+      }
       $plans.append($plan);
       if (promotion) {
         $plan.classList.add('promotional');
@@ -882,11 +890,16 @@ function decoratePlans() {
       $header.append($image);
       const $separator = createTag('div', { class: 'plan-separator' });
       $plan.append($separator);
-      const $pricing = createTag('span', { class: 'plan-pricing' });
+      const $pricing = createTag('div', { class: 'plan-pricing' });
       if (pricing === 'Free') {
         $pricing.innerHTML = '<strong>Free</strong>';
       } else {
-        $pricing.innerHTML = 'US $<strong>' + pricing + '</strong>/mo';
+        if (oldPricing) {
+          console.log('old pricing: ' + oldPricing);
+          $pricing.innerHTML = '<span>US $<strong>' + pricing + '</strong>/mo</span><span class="previous-pricing">US $<strong>' + oldPricing + '</strong>/mo</span>';
+        } else {
+          $pricing.innerHTML = '<span>US $<strong>' + pricing + '</strong>/mo</span>';
+        }
       }
 
       $plan.append($pricing);

@@ -144,6 +144,42 @@ main .section-wrapper.hero > div {
     color: #82919c;
 }
 
+#discount-terms--conditions-call-800-915-9428-for-questions-or-purchase-orders a {
+    font-size: 14px;
+    color: #82919c!important;
+}
+
+a.button.secondary {
+    border-radius: 24px;
+    background: rgba(255,255,255,1);
+    color: #82919b;
+    border: 2px #82919b solid;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 2px 40px;
+}
+
+a.button.secondary:hover {
+    background-color: #82919b;
+    color: white;
+}
+
+.icon.icon-creative-cloud {
+    margin-top: 50px;
+}
+
+#adobe-spark-is-a-part-of-most-creative-cloud-paid-plans-learn-more {
+    font-size: 16px;
+    color: rgb(130, 145, 156);
+    font-weight: normal;
+    text-shadow: none;
+}
+
+#adobe-spark-is-a-part-of-most-creative-cloud-paid-plans-learn-more a {
+    color: #1473e6!important;
+    text-decoration: none!important;
+}
+
 /** PLAN BLOCKS **/
 
 .plans-container {
@@ -232,6 +268,21 @@ main .section-wrapper.hero > div {
 .plan-pricing {
     font-size: 14px;
     color: rgb(53,65,76);
+}
+
+.previous-pricing {
+    position: relative;
+    margin-left: 20px;
+}
+
+.previous-pricing::after {
+    position: absolute;
+    content: '';
+    width: 110%;
+    top: 45%;
+    left: -5%;
+    height: 2px;
+    background-color: red;
 }
 
 .plan-pricing strong {
