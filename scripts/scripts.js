@@ -1031,6 +1031,249 @@ function decorateContactBlocks() {
   });
 }
 
+function decorateColumnPrimary() {
+  document.querySelectorAll('main .columns-primary').forEach(($columns) => {
+    const columns = [];
+
+    const $rows = Array.from($columns.children);
+    $rows.forEach(($row, i) => {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      const $cells = Array.from($row.children);
+      const $title = $cells[0];
+      const $text = $cells[1];
+      const $image = $cells[2];
+
+      const title = $title.textContent;
+      const text = $text.textContent;
+      const image = $image.querySelector('img').src;
+
+      columns.push({
+        title, text, image,
+      });
+    });
+
+    $columns.innerHTML = '';
+    columns.forEach((column) => {
+      const title = column.title;
+      const text = column.text;
+      const image = column.image;
+
+      const $column = createTag('div', { class: 'column' });
+      $columns.append($column);
+      const $textContainer = createTag('div', { class: 'column-text-container' });
+      $column.append($textContainer);
+      const $title = createTag('h3', { class: 'column-title primary' });
+      $title.innerHTML = title;
+      $textContainer.append($title);
+      const $text = createTag('p', { class: 'column-text' });
+      $text.innerHTML = text;
+      $textContainer.append($text);
+      const $image = createTag('img', { class: 'column-image', src: image });
+      $column.append($image);
+    });
+  });
+}
+
+function decorateListPrimary() {
+  document.querySelectorAll('main .list-primary').forEach(($list) => {
+    const list = [];
+
+    const $rows = Array.from($list.children);
+    $rows.forEach(($row, i) => {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      const $cells = Array.from($row.children);
+      const $title = $cells[0];
+      const $text = $cells[1];
+
+      const title = $title.textContent;
+      const text = $text.textContent;
+
+      list.push({
+        title, text,
+      });
+    });
+
+    $list.innerHTML = '';
+    list.forEach((item) => {
+      const title = item.title;
+      const text = item.text;
+
+      const $listItem = createTag('div', { class: 'list-item' });
+      $list.append($listItem);
+      const $title = createTag('h3', { class: 'list-item-title primary' });
+      $title.innerHTML = title;
+      $listItem.append($title);
+      const $text = createTag('p', { class: 'list-item-text' });
+      $text.innerHTML = text;
+      $listItem.append($text);
+    });
+  });
+}
+
+function decorateColumnSecondary() {
+  document.querySelectorAll('main .columns-secondary').forEach(($columns) => {
+    const columns = [];
+
+    const $rows = Array.from($columns.children);
+    $rows.forEach(($row, i) => {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      const $cells = Array.from($row.children);
+      const $title = $cells[0];
+      const $text = $cells[1];
+      const $image = $cells[2];
+
+      const title = $title.textContent;
+      const text = $text.textContent;
+      const image = $image.querySelector('img').src;
+
+      columns.push({
+        title, text, image,
+      });
+    });
+
+    $columns.innerHTML = '';
+    columns.forEach((column) => {
+      const title = column.title;
+      const text = column.text;
+      const image = column.image;
+
+      const $column = createTag('div', { class: 'column' });
+      $columns.append($column);
+      const $textContainer = createTag('div', { class: 'column-text-container' });
+      $column.append($textContainer);
+      const $title = createTag('h3', { class: 'column-title secondary' });
+      $title.innerHTML = title;
+      $textContainer.append($title);
+      const $text = createTag('p', { class: 'column-text' });
+      $text.innerHTML = text;
+      $textContainer.append($text);
+      const $image = createTag('img', { class: 'column-image', src: image });
+      $column.append($image);
+    });
+  });
+}
+
+function decorateListSecondary() {
+  document.querySelectorAll('main .list-secondary').forEach(($list) => {
+    const list = [];
+
+    const $rows = Array.from($list.children);
+    $rows.forEach(($row, i) => {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      const $cells = Array.from($row.children);
+      const $title = $cells[0];
+      const $text = $cells[1];
+
+      const title = $title.textContent;
+      const text = $text.textContent;
+
+      list.push({
+        title, text,
+      });
+    });
+
+    $list.innerHTML = '';
+    list.forEach((item) => {
+      const title = item.title;
+      const text = item.text;
+
+      const $listItem = createTag('div', { class: 'list-item' });
+      $list.append($listItem);
+      const $title = createTag('h3', { class: 'list-item-title secondary' });
+      $title.innerHTML = title;
+      $listItem.append($title);
+      const $text = createTag('p', { class: 'list-item-text' });
+      $text.innerHTML = text;
+      $listItem.append($text);
+    });
+  });
+}
+
+function decorateColumnTertiary() {
+  document.querySelectorAll('main .columns-tertiary').forEach(($columns) => {
+    const columns = [];
+
+    const $rows = Array.from($columns.children);
+    $rows.forEach(($row, i) => {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      const $cells = Array.from($row.children);
+      const $title = $cells[0];
+      const $text = $cells[1];
+      const $image = $cells[2];
+
+      const title = $title.textContent;
+      const text = $text.textContent;
+      const image = $image.querySelector('img').src;
+
+      columns.push({
+        title, text, image,
+      });
+    });
+
+    $columns.innerHTML = '';
+    columns.forEach((column) => {
+      const title = column.title;
+      const text = column.text;
+      const image = column.image;
+
+      const $column = createTag('div', { class: 'column' });
+      $columns.append($column);
+      const $textContainer = createTag('div', { class: 'column-text-container' });
+      $column.append($textContainer);
+      const $title = createTag('h3', { class: 'column-title tertiary' });
+      $title.innerHTML = title;
+      $textContainer.append($title);
+      const $text = createTag('p', { class: 'column-text' });
+      $text.innerHTML = text;
+      $textContainer.append($text);
+      const $image = createTag('img', { class: 'column-image', src: image });
+      $column.append($image);
+    });
+  });
+}
+
+function decorateListTertiary() {
+  document.querySelectorAll('main .list-tertiary').forEach(($list) => {
+    const list = [];
+
+    const $rows = Array.from($list.children);
+    $rows.forEach(($row, i) => {
+      // eslint-disable-next-line no-console
+      console.log(i);
+      const $cells = Array.from($row.children);
+      const $title = $cells[0];
+      const $text = $cells[1];
+
+      const title = $title.textContent;
+      const text = $text.textContent;
+
+      list.push({
+        title, text,
+      });
+    });
+
+    $list.innerHTML = '';
+    list.forEach((item) => {
+      const title = item.title;
+      const text = item.text;
+
+      const $listItem = createTag('div', { class: 'list-item' });
+      $list.append($listItem);
+      const $title = createTag('h3', { class: 'list-item-title tertiary' });
+      $title.innerHTML = title;
+      $listItem.append($title);
+      const $text = createTag('p', { class: 'list-item-text' });
+      $text.innerHTML = text;
+      $listItem.append($text);
+    });
+  });
+}
+
 function decorateMetaData() {
   const $meta = document.querySelector('main .metadata');
   if ($meta) {
@@ -1077,6 +1320,12 @@ async function decoratePage() {
   decoratePlans();
   decoratePricing();
   decorateContactBlocks();
+  decorateColumnPrimary();
+  decorateListPrimary();
+  decorateColumnSecondary();
+  decorateListSecondary();
+  decorateColumnTertiary();
+  decorateListTertiary();
   decorateMetaData();
   decorateCheckerBoards();
   decorateDoMoreEmbed();

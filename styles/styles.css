@@ -150,7 +150,13 @@ main .section-wrapper.hero > div {
     background-color: rgba(242,244,245,1);
 }
 
-.plans-container>div {
+.plans-container>div,
+.columns-primary-container>div,
+.columns-secondary-container>div,
+.columns-tertiary-container>div,
+.list-primary-container>div,
+.list-secondary-container>div,
+.list-tertiary-container>div {
     max-width: none!important;
 }
 
@@ -174,6 +180,8 @@ main .section-wrapper.hero > div {
 
 .plan.promotional {
     border: 2px #5167CF solid;
+    width: 206px;
+    height: 296px;
 }
 
 .plan-promotional-header {
@@ -181,7 +189,7 @@ main .section-wrapper.hero > div {
     display: flex;
     background: linear-gradient(#FFDA00, #e6ab00);
     height: 30px;
-    width: 254px;
+    width: 250px;
     top: -32px;
     font-weight: 600;
     font-size: 12px;
@@ -261,6 +269,13 @@ main .section-wrapper.hero > div {
     border-radius: 24px;
     border: none;
     margin-top: 1em;
+    cursor: pointer;
+    outline: none;
+    transition: .2s all ease-in;
+}
+
+.plan-button:hover, .plan-button:active {
+    background-color: rgba(62,82,197,1);
 }
 
 /** PRICING GRID **/
@@ -303,12 +318,12 @@ main .section-wrapper.hero > div {
 }
 
 .feature-column {
-    width: 260px;
+    width: 270px;
 }
 
 .feature-title-container {
     width: 240px;
-    margin-right: 70px;
+    margin-right: 60px;
     padding-left: 60px;
     text-align: left;
 }
@@ -363,3 +378,75 @@ main .section-wrapper.hero > div {
     color: rgb(53, 65, 76);
 }
 
+.columns-primary, .columns-secondary .columns-tertiary {
+    margin: 0 auto;
+    width: 1140px;
+}
+
+.column {
+    display: flex;
+    width: 1140px;
+    margin: 50px auto;
+}
+
+.column-title {
+    width: 460px;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.column-title.primary {
+    color: rgb(75, 0, 176);
+}
+
+.column-title.secondary {
+    color: rgb(255, 73, 49);
+}
+
+.column-title.tertiary {
+    color: rgb(16, 196, 89);
+}
+
+.column-text {
+    font-size: 22px;
+    color: rgb(40, 70, 96);
+    text-align: left;
+}
+
+.list-primary, .list-secondary, .list-tertiary {
+    width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.list-item {
+    margin-bottom: 50px;
+    width: 310px;
+}
+
+.list-item-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.list-item-title.primary {
+    color: rgb(75, 0, 176);
+}
+
+.list-item-title.secondary {
+    color: rgb(255, 73, 49);
+}
+
+.list-item-title.tertiary {
+    color: rgb(16, 196, 89);
+}
+
+.list-item-text {
+    font-size: 14px;
+    color: rgb(40, 60, 96);
+}
