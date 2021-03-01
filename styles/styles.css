@@ -1,3 +1,5 @@
+
+
 body {
     font-family: 'adobe-clean', 'Adobe Clean';
     margin: 0;
@@ -125,18 +127,6 @@ main .section-wrapper.hero > div {
     }
 }
 
-#do-more-with-your-brand {
-    width: 300px;
-    display: inline-flex;
-    color: rgb(40, 70, 96);
-    font-size: 40px;
-    font-weight: 900;
-    text-shadow: none;
-    text-align: left;
-    margin-right: 50px;
-    margin-top: 0;
-}
-
 #discount-terms--conditions-call-800-915-9428-for-questions-or-purchase-orders {
     margin: 2em auto 4em auto;
     font-size: 14px;
@@ -186,7 +176,6 @@ a.button.secondary:hover {
     background-color: rgba(242,244,245,1);
 }
 
-.plans-container>div,
 .columns-primary-container>div,
 .columns-secondary-container>div,
 .columns-tertiary-container>div,
@@ -194,6 +183,23 @@ a.button.secondary:hover {
 .list-secondary-container>div,
 .list-tertiary-container>div {
     max-width: none!important;
+}
+
+.plans-container>div {
+    max-width: 1140px!important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#do-more-with-your-brand {
+    max-width: 250px;
+    color: rgb(40, 70, 96);
+    font-size: 40px;
+    font-weight: 900;
+    text-shadow: none;
+    text-align: left;
+    margin-top: 0;
 }
 
 .plans {
@@ -238,6 +244,10 @@ a.button.secondary:hover {
 .plan-header {
     display: flex;
     text-align: left;
+    border-bottom: 1px #DBDBDB solid;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    min-height: 100px;
 }
 
 .plan-image {
@@ -255,14 +265,6 @@ a.button.secondary:hover {
     font-size: 13px;
     color: rgb(53,65,76);
     text-shadow: none;
-}
-
-.plan-separator {
-    width: 100%;
-    height: 1px;
-    background-color: #DBDBDB;
-    margin-top: 1em;
-    margin-bottom: 1em;
 }
 
 .plan-pricing {
@@ -329,11 +331,178 @@ a.button.secondary:hover {
     background-color: rgba(62,82,197,1);
 }
 
+.plan-features-container {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .plans-container>div {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    #do-more-with-your-brand {
+        font-size: 32px;
+        width: auto;
+        max-width: none;
+        margin-right: 220px;
+        margin-bottom: 60px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .plans-container {
+        padding-bottom: 0!important;
+    }
+
+    #do-more-with-your-brand {
+        margin: 0 0 40px 0;
+    }
+
+    .plans-container>div {
+        justify-content: center;
+    }
+
+    .plans {
+        flex-direction: column;
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .plan {
+        flex-grow: 1;
+        width: auto;
+        max-width: 560px;
+        height: auto;
+        margin-bottom: 60px;
+        padding: 40px 20px;
+    }
+
+    .plan.promotional {
+        width: auto;
+        max-width: 560px;
+        margin-top: 30px;
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .plan-promotional-header {
+        width: calc(100% + 4px);
+        max-width: 604px;
+    }
+
+    .plan-pricing {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .previous-pricing {
+        margin-top: 10px;
+        margin-left: 0;
+        margin-bottom: 5px;
+    }
+
+    .plan-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-bottom: none;
+    }
+
+    .plan-header-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .plan-image {
+        align-self: center;
+        width: 100px;
+    }
+
+    .plan-features-container {
+        display: block;
+        text-align: left;
+    }
+
+    .plan-features-category {
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 0 20px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    .plan-feature {
+        display: flex;
+        padding: 0 20px;
+        max-width: 600px;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .plan-feature-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .plan-feature-text {
+        margin: 0 0 0 20px;
+        font-size: 16px;
+        color: rgb(53, 65, 76);
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 600px) {
+    .plan {
+        max-width: 280px;
+        padding: 40px 10px;
+    }
+
+    .plan.promotional {
+        width: auto;
+        max-width: 280px;
+        padding: 40px 10px;
+        margin-top: 30px;
+    }
+
+    .plan-features-category {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 0 10px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .plan-feature {
+        display: flex;
+        padding: 0 10px;
+        max-width: 600px;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .plan-feature-image {
+        width: 25px;
+        height: 25px;
+    }
+
+    .plan-feature-text {
+        margin: 0 0 0 20px;
+        font-size: 12px;
+    }
+}
+
 /** PRICING GRID **/
 
 .feature-comparison {
     margin: 0 auto;
-    width: 1140px;
+    max-width: 1140px;
     text-shadow: none;
 }
 
@@ -361,21 +530,41 @@ a.button.secondary:hover {
     background-color: white;
     display: flex;
     align-items: center;
-    height: 60px;
+    padding: 10px 0;
 }
 
 .feature-row:nth-child(odd) {
     background-color: rgba(242,244,245,1);
 }
 
+.feature-special {
+    min-width: 40px;
+    text-align: center;
+}
+
+.feature-special span {
+    background-color: rgba(15,196,89,1);
+    height: 50px;
+    border-radius: 3px;
+    font-weight: bolder;
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+    padding: 2px 6px;
+}
+
 .feature-column {
-    width: 270px;
+    min-width: 250px;
+    margin-right: 15px;
+}
+
+.feature-column:last-child {
+    margin-right: 0;
 }
 
 .feature-title-container {
-    width: 240px;
-    margin-right: 60px;
-    padding-left: 60px;
+    width: 100%;
+    margin-right: 10px;
+    padding-left: 20px;
     text-align: left;
 }
 
@@ -384,7 +573,17 @@ a.button.secondary:hover {
     color: rgb(53, 65, 76);
 }
 
+@media (max-width: 1100px) {
+    .feature-comparison {
+        display: none;
+    }
+}
+
 /** CONTACT BLOCK **/
+
+.contact-container {
+    background-color: rgba(242,244,245,1);
+}
 
 .contact-block-container {
     display: flex;
@@ -429,14 +628,78 @@ a.button.secondary:hover {
     color: rgb(53, 65, 76);
 }
 
-.columns-primary, .columns-secondary .columns-tertiary {
+@media (max-width: 1200px) {
+    .contact-block-container {
+        flex-direction: column;
+    }
+
+    .contact-block-title {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .contact-block {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .contact-container>div {
+        padding-top: 0!important;
+    }
+
+    .contact-block {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .contact-block-text {
+        margin-bottom: 0;
+    }
+
+    .contact-block-text-container {
+        width: auto;
+    }
+
+    #discount-terms--conditions-call-800-915-9428-for-questions-or-purchase-orders {
+        margin-top: 0;
+    }
+
+    .icon-creative-cloud {
+        margin-top: 0!important;
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-block {
+        max-width: 300px;
+    }
+
+    #discount-terms--conditions-call-800-915-9428-for-questions-or-purchase-orders {
+        max-width: 300px;
+    }
+
+    #adobe-spark-is-a-part-of-most-creative-cloud-paid-plans-learn-more {
+        max-width: 300px;
+        font-size: 14px;
+        margin: 0 auto;
+    }
+}
+
+
+/** COLUMNS CSS **/
+
+.columns-primary, .columns-secondary, .columns-tertiary {
     margin: 0 auto;
-    width: 1140px;
+    max-width: 1140px;
 }
 
 .column {
     display: flex;
-    width: 1140px;
+    width: 100%;
     margin: 50px auto;
 }
 
@@ -467,8 +730,79 @@ a.button.secondary:hover {
     text-align: left;
 }
 
+.column-image {
+    width: 50%;
+}
+
+@media (max-width: 1200px) {
+    .column {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 600px;
+        align-items: center;
+    }
+
+    .column-title {
+        width: auto;
+    }
+
+    .column-image {
+        margin-top: 50px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .columns-tertiary-container>div {
+        padding-bottom: 0!important;
+    }
+
+    .column-title {
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .column-text {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .column-image {
+        width: 80%;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .column {
+        max-width: 300px;
+    }
+
+    .column-title {
+        max-width: 240px;
+        font-size: 24px;
+        margin: 0 auto;
+    }
+
+    .column-text {
+        margin-top: 30px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    .column-image {
+        width: 100%;
+    }
+}
+
+
+/** LIST CSS **/
+
 .list-primary, .list-secondary, .list-tertiary {
-    width: 1140px;
+    max-width: 1140px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -500,4 +834,22 @@ a.button.secondary:hover {
 .list-item-text {
     font-size: 14px;
     color: rgb(40, 60, 96);
+}
+
+@media (max-width: 1200px) {
+    .list-primary, .list-secondary, .list-tertiary {
+        margin-top: 80px;
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 600px) {
+    .list-primary, .list-secondary, .list-tertiary {
+        max-width: 300px;
+    }
+
+    .list-item-text {
+        font-size: 14px;
+        line-height: 1.2;
+    }
 }

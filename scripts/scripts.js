@@ -823,7 +823,7 @@ function decorateTutorials() {
   });
 }
 
-function decoratePlans() {
+function decoratePlans(features) {
   document.querySelectorAll('main .plans').forEach(($plans) => {
     const plans = [];
 
@@ -850,6 +850,7 @@ function decoratePlans() {
     });
 
     $plans.innerHTML = '';
+    let i = 1;
     plans.forEach((plan) => {
       const promotion = plan.promotion;
       const title = plan.information[0];
@@ -888,18 +889,13 @@ function decoratePlans() {
       $headerText.append($description);
       const $image = createTag('img', { src: image, class: 'plan-image' });
       $header.append($image);
-      const $separator = createTag('div', { class: 'plan-separator' });
-      $plan.append($separator);
       const $pricing = createTag('div', { class: 'plan-pricing' });
       if (pricing === 'Free') {
         $pricing.innerHTML = '<strong>Free</strong>';
+      } else if (oldPricing) {
+        $pricing.innerHTML = '<span>US $<strong>' + pricing + '</strong>/mo</span><span class="previous-pricing">US $<strong>' + oldPricing + '</strong>/mo</span>';
       } else {
-        if (oldPricing) {
-          console.log('old pricing: ' + oldPricing);
-          $pricing.innerHTML = '<span>US $<strong>' + pricing + '</strong>/mo</span><span class="previous-pricing">US $<strong>' + oldPricing + '</strong>/mo</span>';
-        } else {
-          $pricing.innerHTML = '<span>US $<strong>' + pricing + '</strong>/mo</span>';
-        }
+        $pricing.innerHTML = '<span>US $<strong>' + pricing + '</strong>/mo</span>';
       }
 
       $plan.append($pricing);
@@ -922,17 +918,39 @@ function decoratePlans() {
       const $button = createTag('input', { type: 'submit', class: 'plan-button' });
       $button.value = buttonText;
       $bottom.append($button);
+
+      const $featureContainer = createTag('div', { class: 'plan-features-container' });
+      $plan.append($featureContainer);
+
+      let categories = [];
+      features.forEach((feature) => {
+        if (feature['Column ' + i] === 'Y') {
+          if (!categories.includes(feature.Category)) {
+            categories.push(feature.Category);
+            const $categoryRow = createTag('span', { class: 'plan-features-category' });
+            $categoryRow.innerHTML = feature.Category;
+            $featureContainer.append($categoryRow);
+          }
+          const $featureBlock = createTag('div', { class: 'plan-feature' });
+          $featureContainer.append($featureBlock);
+          const $featureImage = createTag('img', { src: 'assets/features/' + feature.Image, class: 'plan-feature-image' });
+          $featureBlock.append($featureImage);
+          const $featureText = createTag('p', { class: 'plan-feature-text' });
+          $featureText.innerHTML = feature.Description;
+          $featureBlock.append($featureText);
+        }
+      });
+      i++;
     });
   });
 }
 
-async function decoratePricing() {
-  const pricingFeatures = await fetchPricingFeatures();
+function decoratePricing(features) {
   document.querySelectorAll('main .feature-comparison').forEach(($features) => {
     $features.innerHTML = '';
     const categories = [];
     const categoryGroups = [];
-    pricingFeatures.forEach((feature) => {
+    features.forEach((feature) => {
       const category = feature.Category;
       if (!categories.includes(category)) {
         categories.push(category);
@@ -976,6 +994,13 @@ async function decoratePricing() {
 
         const $feature = createTag('div', { class: 'feature-row' });
         $features.append($feature);
+        const $special = createTag('div', { class: 'feature-special' });
+        $feature.append($special);
+        if (feature.Special) {
+          const $specialText = createTag('span');
+          $specialText.innerHTML = feature.Special;
+          $special.append($specialText);
+        }
         const $titleContainer = createTag('div', { class: 'feature-title-container' });
         $feature.append($titleContainer);
         const $title = createTag('span', { class: 'feature-title' });
@@ -993,6 +1018,12 @@ async function decoratePricing() {
       });
     });
   });
+}
+
+async function buildPricingTable() {
+  const features = await fetchPricingFeatures();
+  decoratePlans(features);
+  decoratePricing(features);
 }
 
 function decorateContactBlocks() {
@@ -1330,8 +1361,7 @@ async function decoratePage() {
   decorateMigratedPages();
   decorateBlogPage();
   decorateTutorials();
-  decoratePlans();
-  decoratePricing();
+  buildPricingTable();
   decorateContactBlocks();
   decorateColumnPrimary();
   decorateListPrimary();
