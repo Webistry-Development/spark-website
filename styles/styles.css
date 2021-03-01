@@ -395,6 +395,7 @@ a.button.secondary:hover {
     .plan-pricing {
         display: flex;
         flex-direction: column;
+        margin-bottom: 0;
     }
 
     .previous-pricing {
@@ -403,9 +404,17 @@ a.button.secondary:hover {
         margin-bottom: 5px;
     }
 
+    .plan-pricing-description {
+        margin: 0;
+    }
+
+    .plan-dropdown {
+        margin-top: 25px;
+    }
+
     .plan-header {
         display: flex;
-        flex-direction: column;
+        flex-direction:column;
         align-items: center;
         border-bottom: none;
     }
@@ -416,11 +425,17 @@ a.button.secondary:hover {
         align-items: center;
         justify-content: center;
         text-align: center;
+        padding: 0 20px;
     }
 
     .plan-image {
         align-self: center;
         width: 100px;
+    }
+
+
+    .plan-button {
+        margin: 30px 0;
     }
 
     .plan-features-container {
@@ -435,6 +450,7 @@ a.button.secondary:hover {
         padding: 0 20px;
         margin-top: 40px;
         margin-bottom: 20px;
+        color: rgb(53, 65, 76);
     }
 
     .plan-feature {
@@ -471,12 +487,15 @@ a.button.secondary:hover {
         margin-top: 30px;
     }
 
+    .plan-features-container {
+        border-top: 1px #DBDBDB solid;
+    }
+
     .plan-features-category {
-        font-size: 14px;
+        font-size: 18px;
         font-weight: 600;
         padding: 0 10px;
         margin-top: 20px;
-        margin-bottom: 10px;
     }
 
     .plan-feature {
